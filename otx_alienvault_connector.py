@@ -11,10 +11,10 @@ from OTXv2 import OTXv2, IndicatorTypes
 from pymisp import ExpandedPyMISP, MISPEvent, MISPAttribute
 
 class MispOTXPulseFeed:
-    def __init__(self, api_key, lookback_days=None):        
+    def __init__(self, lookback_days=None):        
         
         self.misp_conn = ExpandedPyMISP(CONST.MISP_URL, CONST.MISP_KEY, CONST.MISP_VERIFY_CERT)
-        self.otx_conn = OTXv2(api_key)
+        self.otx_conn = OTXv2(CONST.OTX_KEY)
         
         self.search_from_ts = (datetime.now() - timedelta(days=lookback_days)) if lookback_days != None else None
         
@@ -99,5 +99,5 @@ class MispOTXPulseFeed:
                 counter+=1               
         return counter
         
-
-worker = MispOTXPulseFeed(api_key=CONST.OTX_KEY, lookback_days=3)
+# Set number of days previous to query
+worker = MispOTXPulseFeed(lookback_days=3)
