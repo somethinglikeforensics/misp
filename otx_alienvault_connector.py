@@ -10,10 +10,6 @@ from const import CONST
 from OTXv2 import OTXv2, IndicatorTypes
 from pymisp import ExpandedPyMISP, MISPEvent, MISPAttribute
 
-#dev imports
-import urllib3
-urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
 class MispOTXPulseFeed:
     def __init__(self, api_key, lookback_days=None):        
         
@@ -62,14 +58,12 @@ class MispOTXPulseFeed:
         misp_event_title = "OTX|{}|{}|{}|modified:{}".format(pulse_dict['id'], pulse_dict['author_name'], pulse_dict["name"][:25], pulse_created.strftime('%Y-%m-%d'))            
         
         if self.return_misp_event_from_title(misp_event_title) == None:
-            misp_event = self.create_misp_event(misp_event_title)
-        # !calls function during logging format!
+            misp_event = self.create_misp_event(misp_event_title)        
             logging.info("New event created from {} and {} tags added".format(pulse_dict['author_name'], self.pulse_tag_worker(pulse_dict, misp_event)))             
             
         else: 
-            misp_event = self.return_misp_event_from_title(misp_event_title)
-            
-        #logging.info("{}".format(misp_event))
+            misp_event = self.return_misp_event_from_title(misp_event_title)            
+        
         return misp_event
         
     def create_misp_event(self, misp_event_title):        
