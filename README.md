@@ -1,8 +1,10 @@
-OTX2MISP
+## OTX2MISP
 
-AlienVault OTX (https://otx.alienvault.com/) is a free service allowing users to publish indicators of compromise (Ioc) feeds ("pulses").
-This script works through your subscribed OTX feeds and generates Misp events based on arbitrary vaules from the pulses' title and author, in an attempt to reduce the number of similar misp events created.
+AlienVault OTX (https://otx.alienvault.com/) is a free service allowing users to publish indicators of compromise (*Ioc*) feeds as *pulses*.
+MISP is an open-source threat intelligence (https://www.misp-project.org/)
 
-Usage
-Edit the const.py with your OTX and Misp instance details
-Recommended usage is via crontab schedule
+This script will pull your subscribed OTX pulses and generate MISP events based on arbitrary vaules from the pulses' title and author (in an attempt to reduce the number of similar misp events created). Indicators from the pulses are then populated on the created MISP events.
+
+### Usage
+- Edit the const.py with your OTX and Misp instance details.
+- Recommended usage is via crontab schedule
